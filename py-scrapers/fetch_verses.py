@@ -31,14 +31,23 @@ def fetch_chapter(book_num, chapter_num):
 
 """
 pool = Pool(1)
-for bk, chap in chapters:
+for bk, chap in enumerate(chapters):
     pool.spawn(fetch_chapter, bk, chap)
 pool.join()
 """
 
+chapter_counts = dict(chapterCounts)
+booknum_to_name = dict(enumerate(chapter_counts.keys()))
+
+chapters = []
+
+for chap, count in enumerate(chapter_counts.values()):
+    chapters += zip([chap+1]*count, range(1,count+1))
+print chapters
+
 #check_urls([(3,1,)])
-fetch_chapter(3,1)
-fetch_chapter(7,1)
+#fetch_chapter(3,1)
+#fetch_chapter(7,1)
 
 
 
